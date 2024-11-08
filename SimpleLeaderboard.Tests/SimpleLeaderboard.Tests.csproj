@@ -25,4 +25,8 @@
     <Using Include="NUnit.Framework" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleLeaderboard\SimpleLeaderboard.csproj" />
+  </ItemGroup>
+
 </Project>
