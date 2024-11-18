@@ -22,8 +22,11 @@ namespace SimpleLeaderboard.Tests.Features.Leaderboard
         [Test]
         public async Task GetHighScoresAsync_Should_Return_HighScore()
         {
-            //Act
-            var highScores = await _sut.GetHighScoresAsync(1, 10);
+            // Arrange
+            var ct = new CancellationToken();
+
+            // Act
+            var highScores = await _sut.GetHighScoresAsync(1, 10, ct);
 
             Assert.That(highScores, Is.InstanceOf<IEnumerable<HighScore>>());
         }

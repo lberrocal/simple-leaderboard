@@ -9,23 +9,25 @@ namespace SimpleLeaderboard.Features.Leaderboard
             _scoreRepository = scoreRepository;
         }
 
-        public async Task<IEnumerable<HighScore>> GetHighScoresAsync(int page, int pageSize)
+        public async Task<IEnumerable<HighScore>> GetHighScoresAsync(int page, int pageSize, CancellationToken ct)
         {
-            var highScores = await _scoreRepository.GetScoresAsync(page, pageSize);
+            var highScores = await _scoreRepository.GetScoresAsync(page, pageSize, ct);
 
             return highScores;
         }
 
-        public Task<int> SaveHighScoreAndGetPlaceAsync(HighScore highScore)
+        public async Task<int> SaveHighScoreAndGetPlaceAsync(HighScore highScore, CancellationToken ct)
         {
-            throw new NotImplementedException();
+            await _scoreRepository.AddHighscoreAsync(highScore, ct);
+
+            return 0;
         }
     }
 
     public interface ILeaderboardService
     {
-        public Task<IEnumerable<HighScore>> GetHighScoresAsync(int page, int pageSize);
-        public Task<int> SaveHighScoreAndGetPlaceAsync(HighScore highScore);
+        public Task<IEnumerable<HighScore>> GetHighScoresAsync(int page, int pageSize, CancellationToken ct);
+        public Task<int> SaveHighScoreAndGetPlaceAsync(HighScore highScore, CancellationToken ct);
     }
 
 }
