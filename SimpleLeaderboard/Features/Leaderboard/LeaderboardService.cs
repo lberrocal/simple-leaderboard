@@ -16,18 +16,24 @@ namespace SimpleLeaderboard.Features.Leaderboard
             return highScores;
         }
 
-        public async Task<int> SaveHighScoreAndGetPlaceAsync(HighScore highScore, CancellationToken ct)
+        public async Task<int> GetRankingAsync(int gameId, int playerId, CancellationToken ct)
+        {
+            var ranking = await _scoreRepository.GetPlayerRankingByScoreAsync(gameId, playerId, ct);
+
+            return ranking;
+        }
+
+        public async Task SaveHighscoreAsync(HighScore highScore, CancellationToken ct)
         {
             await _scoreRepository.AddHighscoreAsync(highScore, ct);
-
-            return 0;
         }
     }
 
     public interface ILeaderboardService
     {
         public Task<IEnumerable<HighScore>> GetHighScoresAsync(int page, int pageSize, CancellationToken ct);
-        public Task<int> SaveHighScoreAndGetPlaceAsync(HighScore highScore, CancellationToken ct);
+        public Task SaveHighscoreAsync(HighScore highScore, CancellationToken ct);
+        public Task<int> GetRankingAsync(int gameId, int playerId, CancellationToken ct);
     }
 
 }

@@ -8,6 +8,11 @@ namespace SimpleLeaderboard.Features.Leaderboard
             throw new NotImplementedException();
         }
 
+        public async Task<int> GetPlayerRankingByScoreAsync(int gameId, int playerId, CancellationToken ct)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<HighScore>> GetScoresAsync(int page, int pageSize, CancellationToken ct)
         {
             throw new NotImplementedException();
@@ -17,6 +22,7 @@ namespace SimpleLeaderboard.Features.Leaderboard
     {
         Task<IEnumerable<HighScore>> GetScoresAsync(int page, int pageSize, CancellationToken ct);
         Task AddHighscoreAsync(HighScore highScore, CancellationToken ct);
+        Task<int> GetPlayerRankingByScoreAsync(int gameId, int playerId, CancellationToken ct);
     }
 
 }
